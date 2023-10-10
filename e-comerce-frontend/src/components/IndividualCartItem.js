@@ -3,33 +3,32 @@ import React from 'react'
 export default function IndividualCartItem({item}) {
     console.log(item)
     const tax = helper(item)
+    console.log(tax)
   return (
     <div>
         <h4>{item.name}</h4>
         <div style={{padding:"0px 0px 0px 10px",margin:"5px 0px"}}>
-        <h5>Price = {item.price*item.qty}</h5>
-        {tax.firsttype != 0 && <h5>Tax {tax.firsttype} = {tax.firstValue}</h5>}
+        <h5>Price = {item.price*parseInt(item.qty)}</h5>
+        {tax.firsttype != 0 && <h5>Tax {tax.firsttype} = {parseFloat(tax.firstValue)}</h5>}
         <h5>Tax {tax.secondtype} = {tax.secondValue}</h5>
-        <h5>Total Price = {parseInt(tax.secondValue) + parseInt(tax.firstValue) + parseInt(item.price)}</h5>
+        <h5>Total Price = {parseFloat(tax.secondValue) + parseFloat(tax.firstValue) + parseFloat(item.price)*parseFloat(item.qty)}</h5>
         </div>
     </div>
   )
 }
 const helper = (item) =>{
-    let price = parseInt(item.price)
     if(item.type=="Product"){
         const firsttype = determineProductTax(item.price)
-        const firstValue = calculateProductTax(item.price*item.qty).toFixed(2)
+        const firstValue = calculateProductTax(parseInt(item.price*parseInt(item.qty))).toFixed(2)
         const secondtype = "PC"
-        const secondValue = 200*item.qty
-        return {firsttype,firstValue,secondValue,secondtype,price}
+        const secondValue = 200*parseInt(item.qty)
+        return {firsttype,firstValue,secondValue,secondtype}
     }else{
         const firsttype = determineServiceTax(item.price)
-        const firstValue = calculateServiceTax(item.price*item.qty).toFixed(2)
+        const firstValue = calculateServiceTax(parseInt(item.price*parseInt(item.qty))).toFixed(2)
         const secondtype = "SC"
-        const secondValue = 100*item.qty
-        price+= parseInt(secondValue) + parseInt(firstValue);
-        return {firsttype,firstValue,secondValue,secondtype,price}
+        const secondValue = 100*parseInt(item.qty)
+        return {firsttype,firstValue,secondValue,secondtype}
     }
 }
 function determineProductTax(price) {
