@@ -1,7 +1,7 @@
 import "./CartScreen.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-
+import IndividualCartItem from "../components/IndividualCartItem";
 // Components
 import CartItem from "../components/CartItem";
 
@@ -66,8 +66,9 @@ const CartScreen = () => {
 
           <div className="cartscreen__right">
             <div className="cartscreen__info">
-              <p>Subtotal ({getCartCount()}) items</p>
-              <p>${getCartSubTotal()}</p>
+              {cartItems.map((item) => (
+                <IndividualCartItem item={item} />
+              ))}
             </div>
             <div>
               <button

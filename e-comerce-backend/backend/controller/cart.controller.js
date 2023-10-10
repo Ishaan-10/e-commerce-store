@@ -31,8 +31,8 @@ const deleteProductInCart = async (req, res) => {
     await Cart.findByIdAndRemove(req.params.id)
     res.status(200).send({status: 'ok'})
   } catch (e) {
-    console.log(err)
-    sendResponseError(500, `Error ${err}`, res)
+    console.log(e)
+    sendResponseError(500, `Error ${e}`, res)
   }
 }
 module.exports = {addProductInCart, deleteProductInCart, getCartProducts}

@@ -16,6 +16,7 @@ export const addToCart = (id, qty) => async dispatch => {
       price: product.price,
       countInStock: product.countInStock,
       qty,
+      type:product.type
     },
   })
 
@@ -37,7 +38,7 @@ export const fetchCart = () => async dispatch => {
     const {data: strigifyData} = await Api.getRequest(`/api/cart/`)
     // console.log({strigifyData})
     const {carts} = JSON.parse(strigifyData)
-    // console.log(carts)
+    console.log(carts)
 
     dispatch({
       type: actionTypes.FETCH_MY_CART,

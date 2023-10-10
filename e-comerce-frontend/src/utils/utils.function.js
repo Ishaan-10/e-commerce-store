@@ -7,6 +7,7 @@ export const convertToCartData = carts => {
       price: c.productId.price,
       countInStock: c.productId.countInStock,
       qty: c.count,
+      type:c.type,
       _id: c._id,
     }
   })
