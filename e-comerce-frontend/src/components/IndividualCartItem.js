@@ -1,9 +1,12 @@
 import React from 'react'
+import { useEffect,useState } from 'react';
 
-export default function IndividualCartItem({item}) {
-    console.log(item)
-    const tax = helper(item)
-    console.log(tax)
+export default function IndividualCartItem({item,increaseAmount}) {
+    const [tax,setTax] = useState(helper(item))
+    
+    useEffect(() => {
+        increaseAmount((parseFloat(tax.secondValue) + parseFloat(tax.firstValue) + parseFloat(item.price)*parseFloat(item.qty)))
+      }, [item]);
   return (
     <div>
         <h4>{item.name}</h4>

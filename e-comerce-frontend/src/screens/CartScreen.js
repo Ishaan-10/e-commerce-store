@@ -8,6 +8,7 @@ import CartItem from "../components/CartItem";
 // Actions
 import { addToCart, removeFromCart } from "../redux/actions/cartActions";
 import useLogin from "../utils/hooks/useLogin";
+import { useState } from "react";
 
 const CartScreen = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,11 @@ const CartScreen = () => {
   const { loginInfo } = useLogin();
 
   const { cartItems } = cart;
+  const [totalAmount,setTotalAmount] = useState(0);
+
+  const increaseAmount = (amount) =>{
+    setTotalAmount(totalAmount+amount)
+  }
 
   const qtyChangeHandler = (id, qty) => {
     dispatch(addToCart(id, qty));
@@ -67,7 +73,7 @@ const CartScreen = () => {
           <div className="cartscreen__right">
             <div className="cartscreen__info">
               {cartItems.map((item) => (
-                <IndividualCartItem item={item} />
+                <IndividualCartItem item={item} increaseAmount={increaseAmount} />
               ))}
             </div>
             <div>
@@ -75,7 +81,7 @@ const CartScreen = () => {
                 title="Functionality need to be add."
                 onClick={handleProceedBtn}
               >
-                Proceed To Checkout
+                {totalAmount}
               </button>
             </div>
           </div>
