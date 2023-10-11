@@ -32,15 +32,15 @@ const CartScreen = () => {
     dispatch(removeFromCart({ pId: item.product, _id: item._id }));
   };
 
-  const getCartCount = () => {
-    return cartItems.reduce((qty, item) => Number(item.qty) + qty, 0);
-  };
+  // const getCartCount = () => {
+  //   return cartItems.reduce((qty, item) => Number(item.qty) + qty, 0);
+  // };
 
-  const getCartSubTotal = () => {
-    return cartItems
-      .reduce((price, item) => price + item.price * item.qty, 0)
-      .toFixed(2);
-  };
+  // const getCartSubTotal = () => {
+  //   return cartItems
+  //     .reduce((price, item) => price + item.price * item.qty, 0)
+  //     .toFixed(2);
+  // };
 
   const handleProceedBtn = () => {
     alert("Functionality pending please stay tune, will be add soon.");

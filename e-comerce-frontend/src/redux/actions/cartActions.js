@@ -1,5 +1,5 @@
 import * as actionTypes from '../constants/cartConstants'
-import axios from 'axios'
+// import axios from 'axios'
 import {Api} from '../../utils/Api'
 import {convertToCartData} from '../../utils/utils.function'
 

@@ -1,18 +1,14 @@
 import React from 'react'
-import { useEffect,useState } from 'react';
 
-export default function IndividualCartItem({item,increaseAmount}) {
-    const [tax,setTax] = useState(helper(item))
-    
-    useEffect(() => {
-        increaseAmount((parseFloat(tax.secondValue) + parseFloat(tax.firstValue) + parseFloat(item.price)*parseFloat(item.qty)))
-      }, [item]);
+export default function IndividualCartItem({item}) {
+    const tax = helper(item)
+
   return (
     <div>
         <h4>{item.name}</h4>
         <div style={{padding:"0px 0px 0px 10px",margin:"5px 0px"}}>
         <h5>Price = {item.price*parseInt(item.qty)}</h5>
-        {tax.firsttype != 0 && <h5>Tax {tax.firsttype} = {parseFloat(tax.firstValue)}</h5>}
+        {tax.firsttype !== 0 && <h5>Tax {tax.firsttype} = {parseFloat(tax.firstValue)}</h5>}
         <h5>Tax {tax.secondtype} = {tax.secondValue}</h5>
         <h5>Total Price = {parseFloat(tax.secondValue) + parseFloat(tax.firstValue) + parseFloat(item.price)*parseFloat(item.qty)}</h5>
         </div>
@@ -20,7 +16,7 @@ export default function IndividualCartItem({item,increaseAmount}) {
   )
 }
 const helper = (item) =>{
-    if(item.type=="Product"){
+    if(item.type==="Product"){
         const firsttype = determineProductTax(item.price)
         const firstValue = calculateProductTax(parseInt(item.price*parseInt(item.qty))).toFixed(2)
         const secondtype = "PC"
